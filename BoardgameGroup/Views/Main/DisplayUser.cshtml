@@ -1,0 +1,53 @@
+﻿@model BoardgameGroup.Models.UserDisplayData
+
+@{
+    ViewBag.Title = "DisplayUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mainContent">
+    <div id="contentField">
+    @if (ViewBag.status >= 20) { 
+        @Html.ActionLink("Rediger", "Profilen", new { club = ViewBag.clubURLname, spillerID = Model.spilleren.spillerID })
+    }
+    <h2>@Html.DisplayFor(model => model.spilleren.fornavn)</h2>
+    <div id="playerRatingArea">
+        <div id="playerRatingField">
+            @Html.DisplayFor(model => model.rating) / @Html.DisplayFor(model => model.toplayerrating)
+        </div>
+    </div>
+    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tr><td>Spill</td><td>Plassering</td><td>Antall spilere</td><td>Poeng</td><td>Fraksjon</td><td></td></tr>
+    @foreach (var item in Model.sesjoner)
+    { 
+        <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Spill.navn)
+        </td>
+        @{ int antall = item.Spillere.Count(); }
+        @foreach (var play in item.Spillere) { 
+            if (play.deltakerID == Model.spilleren.spillerID)
+            {
+               <td>
+                    @Html.DisplayFor(modelItem => play.posisjon)
+               </td>
+                <td>
+                    @antall 
+               </td>           
+                <td>
+                    @Html.DisplayFor(modelItem => play.poengsum)
+               </td>
+               <td>
+                    @Html.DisplayFor(modelItem => play.fraksjonen.navn)
+               </td>
+            }
+
+        }
+        <td>
+            @Html.ActionLink("Vis", "registrerSpilldeltakelse", new { club = ViewBag.clubURLname, spillID = item.Spill.spillID, sesjonID = item.spillsesjonID })
+        </td>
+        </tr>
+    }
+    </table>
+    </div>
+ </div>

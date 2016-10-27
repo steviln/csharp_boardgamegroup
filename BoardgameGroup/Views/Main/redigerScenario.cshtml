@@ -1,0 +1,32 @@
+﻿@model BoardgameGroup.Models.SpillScenario
+
+@{
+    ViewBag.Title = "redigerScenario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="mainContent">
+<h2>Rediger Scenario</h2>
+<div id="loginZone">
+@using (Html.BeginForm()) { 
+    <fieldset>
+        @Html.HiddenFor(model => model.spillID)
+        @Html.HiddenFor(model => model.scenarioID)
+        <div class="gamelistcolumn">
+            @Html.Label("Navn") 
+        </div>
+        <div class="gamelistcolumn">
+            @Html.TextBoxFor(model => model.navn) 
+        </div>
+        <div class="gamelistcolumn">
+            @Html.Label("Scenario kode") 
+        </div>
+        <div class="gamelistcolumn">
+            @Html.TextBoxFor(model => model.kode) 
+        </div>
+    </fieldset> 
+    <input class="hovedSubmitKnapp" type="submit" name="lagre" value="Lagre scenario" />
+}
+</div>
+</div>

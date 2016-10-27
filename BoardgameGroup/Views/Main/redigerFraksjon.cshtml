@@ -1,0 +1,34 @@
+﻿@model BoardgameGroup.Models.SpillFraksjon
+
+@{
+    ViewBag.Title = "redigerFraksjon";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="mainContent">
+<h1>Rediger/Legg til Fraksjon</h1>
+<div id="loginZone">
+@using (Html.BeginForm()) { 
+    <fieldset>
+        @Html.HiddenFor(model => model.spillID)
+        @Html.HiddenFor(model => model.fraksjonID)
+        <div class="formLine">
+            <div class="formLabel">
+                @Html.Label("Navn") 
+            </div>
+            <div class="formField">
+                @Html.TextBoxFor(model => model.navn) 
+            </div>
+        </div>
+        <div class="formLine">
+            <div class="formLabel">
+                @Html.Label("Farge") 
+            </div>
+            <div class="formField">
+                @Html.TextBoxFor(model => model.farge) 
+            </div>
+        </div>
+    <input class="hovedSubmitKnapp" type="submit" name="lagre" value="Lagre fraksjon" />
+    </fieldset> 
+}
+</div>
+</div>

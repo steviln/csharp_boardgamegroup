@@ -1,0 +1,99 @@
+﻿@model BoardgameGroup.Models.SpillSeData
+@{
+    ViewBag.Title = "Boardgame";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mainContent">
+    <div id="contentField">
+
+        <h1>@Html.DisplayFor(model => model.spillet.navn)</h1>
+        Antall spillere: @Html.DisplayFor(model => model.spillet.spillerantall)
+
+        <h2>Fraksjoner:</h2>
+        @if (Model.spillet.spillID != 0)
+        {
+            foreach (var item in Model.spillet.fraksjoner)
+            {
+                <div class="gamefraksjondata">
+                    @Html.DisplayFor(modelItem => item.navn)
+                </div>
+            }
+        }
+        @if (Model.spillerID != 0)
+        {
+            <br /><br />
+            <h2>Ranger spillet</h2>
+
+            int valgrang = 0;
+            if (Model.rangeringen != null)
+            {
+                valgrang = Model.rangeringen.rangering;
+            }
+            <input type="hidden" id="modspillID" value="@Html.Raw(Model.spillet.spillID)" />
+            <select id="spillRangeringValg">
+                @for (int numb = 0; numb < Model.rangeringsverdier.Length; numb++)
+                {
+                    if (valgrang == numb)
+                    {
+                        <option value="@Html.Raw(numb)" selected>@Html.Raw(Model.rangeringsverdier[numb])</option>
+                    }
+                    else
+                    {
+                        <option value="@Html.Raw(numb)">@Html.Raw(Model.rangeringsverdier[numb])</option>
+                    }
+                }
+            </select>
+        }        
+        <h2>Spillinger</h2>
+        @foreach (var item in Model.sesjoner)
+        {
+            <div class="gamelistrow">
+                @Html.DisplayFor(modelItem => item.dato)
+                @Html.ActionLink("Vis spilling", "registrerSpilldeltakelse", new { club = ViewBag.clubURLname, spillID = Model.spillet.spillID, sesjonID = item.spillsesjonID })
+            </div>
+        }
+        <h2>Beste spillere</h2>
+        <div class="frontpageBoxHalf">
+            <table border="0" cellspacing="0" cellpadding="0">
+                <tr><td>Spiller</td><td>Rating</td><td>Snittscore</td><td>Winrate</td><td>Lossrate</td><td></td></tr>
+                @for (int i = 0; i < 10 && i < Model.rangertespillere.Count(); i++)
+                {
+                    if (Model.rangertespillere[i].rating > 0)
+                    {
+                        @:
+                        <tr><td> @Html.DisplayFor(model => Model.rangertespillere[i].spillernavn) </td><td> @Html.DisplayFor(model => Model.rangertespillere[i].rating) </td><td> @Html.DisplayFor(model => Model.rangertespillere[i].average) </td><td> @Html.DisplayFor(model => Model.rangertespillere[i].winrate) </td><td> @Html.DisplayFor(model => Model.rangertespillere[i].lossrate) </td><td> @Html.ActionLink("Vis", "Users", new { club = ViewBag.clubURLname, itemID = Model.rangertespillere[i].spillerID })</td></tr>
+    }
+                }
+            </table>
+
+            <h2>Beste fraksjoner</h2>
+            <div class="frontpageBoxHalf">
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <tr><td>Fraksjon</td><td>Rating</td><td>Snittscore</td><td></td></tr>
+                    @for (int i = 0; i < Model.rangertefraksjoner.Count(); i++)
+                    {
+                        if (Model.rangertefraksjoner[i].rating > 0)
+                        {
+                            @:
+                            <tr><td> @Html.DisplayFor(model => Model.rangertefraksjoner[i].fraksjonsavn) </td><td> @Html.DisplayFor(model => Model.rangertefraksjoner[i].rating) </td><td> @Html.DisplayFor(model => Model.rangertefraksjoner[i].average) </td><td></td></tr>
+    }
+                    }
+                </table>
+
+            </div><br />
+            <h2>Spillere sine rangeringer</h2>
+    
+            @{int teller = 0, sisterangering = -1; }
+            @foreach (var rangobjekt in Model.spilleronsker) { 
+                if(sisterangering != rangobjekt.rangering){
+                    <h3>@Html.Raw(Model.rangeringsverdier[rangobjekt.rangering])</h3>
+                }
+                <div>@Html.Raw(rangobjekt.spillernavn) @Html.ActionLink("Vis", "Users", new { club = ViewBag.clubURLname, itemID = rangobjekt.spillerID })</div>
+                sisterangering = rangobjekt.rangering;
+                teller++;
+            }
+        </div>
+    </div>
+</div>
+

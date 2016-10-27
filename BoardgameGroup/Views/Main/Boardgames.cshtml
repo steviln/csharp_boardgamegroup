@@ -1,0 +1,130 @@
+﻿@model BoardgameGroup.Models.BoardgameReg
+
+@{
+    ViewBag.Title = "Boardgames";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mainContent">
+    <div id="sideMenu">
+    @if (ViewBag.status >= 20)
+    {
+        @Html.ActionLink("Legg til spill", "Boardgames", new { club = ViewBag.clubURLname, subaction = "addgame" })
+    }
+    </div>
+    <div id="contentField">
+        <h1>Boardgames</h1>
+
+        @using (Html.BeginForm()) { 
+            <fieldset class="normalFieldset">      
+                @Html.HiddenFor(model => model.spillet.spillID)
+                <div class="formLabel">
+                    @Html.Label("Navn")
+                </div>
+                <div class="formField">
+                    @Html.TextBoxFor(model => model.spillet.navn)
+                </div>
+                <div class="formLabel">
+                    @Html.Label("Boardgamegeek ID")
+                </div>
+                <div class="formField">
+                    @Html.TextBoxFor(model => model.spillet.boardgamegeekID)
+                </div>
+                <div class="formLabel">
+                    @Html.Label("Antall spillere")
+                </div>
+                <div class="formFieldShort">
+                    @Html.TextBoxFor(model => model.spillet.spillerantall)
+                </div>
+                <div class="formLabel">
+                    @Html.Label("Utgiver")
+                </div>
+                <div class="formField">
+                    @Html.DropDownListFor(model => model.spillet.selskapID, new SelectList(Model.selskaper, "ID", "name", Model.spillet.selskapID))
+                    <input type="button" class="forgotPlayerButton" data-ajax-destination="AddSelskap" value="Legg til selskap" />
+                </div>
+                @if (Model.spillet.spillID == 0)
+                {
+                    <input class="hovedSubmitKnapp" type="submit" name="submit" value="Opprett nytt spill" />
+                }
+                else { 
+                    <input class="hovedSubmitKnapp" type="submit" name="submit" value="Endre spill" />
+                }
+            </fieldset> 
+            if (Model.spillet.spillID != 0)
+            {
+            <div id="internLenker">
+                @Html.ActionLink("Logg spill", "registrerSpilldeltakelse", new { club = ViewBag.clubURLname, spillID = Model.spillet.spillID }) 
+                @Html.ActionLink("Lag ny fraksjon", "redigerFraksjon", new { club = ViewBag.clubURLname, spillID = Model.spillet.spillID })  
+                @Html.ActionLink("Lag nytt scenario", "redigerScenario", new { club = ViewBag.clubURLname, spillID = Model.spillet.spillID })   
+            </div>
+            }
+        }
+       
+        @if (Model.spillet.spillID != 0)
+        {
+            <h2>Fraksjoner</h2>
+            foreach (var item in Model.spillet.fraksjoner)
+            { 
+                <div class="gamelistcolumn">
+                    @Html.DisplayFor(modelItem => item.navn)
+                </div>
+                <div class="gamelistcolumn">
+                    @Html.ActionLink("Rediger fraksjon", "redigerFraksjon", new { club = ViewBag.clubURLname, spillID = Model.spillet.spillID, itemID = item.fraksjonID })  
+                </div>
+            }
+        }
+
+        @if (Model.spillet.spillID != 0)
+        {
+            <br /><br />
+            <h2>Scenarier</h2>
+            foreach (var item in Model.spillet.scenarier)
+            { 
+                <div class="gamelistcolumn">
+                    @Html.DisplayFor(modelItem => item.navn)
+                </div>
+                <div class="gamelistcolumn">
+                    @Html.ActionLink("Rediger scenario", "redigerScenario", new { club = ViewBag.clubURLname, spillID = Model.spillet.spillID, itemID = item.scenarioID })
+  
+                </div>
+            }
+        }
+        
+        @if (Model.spillerID != 0) 
+        { 
+            <br /><br />
+            <h2>Ranger spillet</h2>
+           
+            int valgrang = 0;
+            if(Model.rangeringen != null){
+                valgrang = Model.rangeringen.rangering;
+            }
+            <input type="hidden" id="modspillID" value="@Html.Raw(Model.spillet.spillID)" />
+            <select id="spillRangeringValg">
+            @for (int numb = 0; numb < Model.rangeringsverdier.Length; numb++)
+            {
+                if (valgrang == numb)
+                {
+                    <option value="@Html.Raw(numb)" selected>@Html.Raw(Model.rangeringsverdier[numb])</option>
+                }
+                else
+                {
+                    <option value="@Html.Raw(numb)">@Html.Raw(Model.rangeringsverdier[numb])</option>
+                }
+            }
+            </select>
+        }
+    </div>
+</div>
+<div id="personUpdaterDiv">
+    <div class="prajax">Navn:</div>
+    <input id="firstVariable" type="text" value="" />
+    <input id="secondVariable" type="hidden" value="" />
+    <br />
+    <input type="button" id="newPlayerButton" value="Legg til selskap" />
+    <input type="button" id="cancelNewPlayerButton" value="Kanseller" />
+</div>
+
+
+

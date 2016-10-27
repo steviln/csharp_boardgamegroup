@@ -1,0 +1,30 @@
+﻿
+        <div id="topMenu">
+            <div id="menBount">
+                <div id="logoField">Dsf</div>
+                <ul>
+                    <li>@Html.ActionLink("Hjem", "Frontpage", new { club = ViewBag.clubURLname })</li>
+                    <li>@Html.ActionLink("Spill", "Boardgames/", new { club = ViewBag.clubURLname })</li>
+                    <li>@Html.ActionLink("Sesjoner", "SpillSesjoner/", new { club = ViewBag.clubURLname })</li>
+                    <li>@Html.ActionLink("Spillere", "Users/", new { club = ViewBag.clubURLname })</li>
+                    <li>@Html.ActionLink("Selskap", "selskap/", new { club = ViewBag.clubURLname })</li>
+                    @if (ViewBag.loggedID == 0)
+                    {
+                        <li>@Html.ActionLink("Registrer", "NyBruker", new { club = ViewBag.clubURLname })</li>
+                    }
+                    else
+                    {
+                       <li> @Html.ActionLink("Profil", "Profilen", new { club = ViewBag.clubURLname, spillerID = ViewBag.loggedID })</li>
+                    }
+                    @if (ViewBag.loggedID == 0)
+                    {
+                        <li> @Html.ActionLink("Login", "Login", new { club = ViewBag.clubURLname })<div id="loggitConfirm"></div></li>
+                        
+                    }
+                    else
+                    {
+                        <li> @Html.ActionLink("Logg ut", "Logout", new { club = ViewBag.clubURLname })</li>
+                    }
+                </ul>
+            </div>
+        </div>

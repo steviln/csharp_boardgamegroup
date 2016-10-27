@@ -1,0 +1,25 @@
+﻿@model BoardgameGroup.Models.Selskap
+
+@{
+    ViewBag.Title = "redigerSelskap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="mainContent">
+<h1>Rediger/Legg til Selskap</h1>
+<div id="loginZone">
+@using (Html.BeginForm()) { 
+    <fieldset>
+        @Html.HiddenFor(model => model.selskapID)
+        <div class="formLine">
+            <div class="formLabel">
+                @Html.Label("Navn") 
+            </div>
+            <div class="formField">
+                @Html.TextBoxFor(model => model.navn) 
+            </div>
+        </div>
+    <input class="hovedSubmitKnapp" type="submit" name="lagre" value="Lagre selskap" />
+    </fieldset> 
+}
+</div>
+</div>

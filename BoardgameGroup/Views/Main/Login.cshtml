@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+<div id="mainContent">
+    <h1>Login</h1>
+    <div id="loginZone">
+           <div id="errorMessageRed"> @ViewBag.errorMessage @Html.ValidationSummary()  </div>
+           <form action="/@ViewBag.clubURLname/Login" method="post">
+                <div class="formLine">
+                    <div class="formLabel">Brukernavn: </div><div class="formField"><input type="text" value="" name="brukernavn" /></div>
+                </div>
+                <div class="formLine">
+                    <div class="formLabel">Passord: </div><div class="formField"><input type="password" value="" name="passord" /></div>
+                </div>
+                <input class="hovedSubmitKnapp" type="submit" name="loginknapp" value="Logg inn" /><br />
+            </form>
+        <br /><button id="facebookLoginButton" onclick="javascript: facebookInit();" class="hovedSubmitKnapp">Logg inn med Facebook</button><br />
+    </div>
+    <div class="fb-login-button" data-show-faces="true" data-width="400" data-max-rows="1"></div>
+</div>

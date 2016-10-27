@@ -1,0 +1,120 @@
+﻿@model BoardgameGroup.Models.SpillRegData
+
+@{
+    ViewBag.Title = "registrerSpilldeltakelse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="mainContent">
+    <div id="sideMenu">
+    </div>
+    <div id="contentField">
+
+        <h2>registrer Spillsesjon</h2>
+            <input type="button" id="sortButton" value="Sorter etter poengsum" />
+            @using (Html.BeginForm())
+            {
+
+                    @Html.HiddenFor(model => model.sesjonen.spillsesjonID)
+                    @Html.HiddenFor(model => model.sesjonen.spillID)
+                    @Html.HiddenFor(model => model.sesjonen.klubbID)
+                    @Html.HiddenFor(model => model.sesjonen.spillerID)
+                    @Html.HiddenFor(model => model.sesjonen.rapportID)
+
+                    <div class="formLabel">
+                            @Html.Label("Dato")
+                    </div>
+                    <div class="formField">
+                            @Html.TextBoxFor(model => model.sesjonen.dato)
+                    </div>
+                    if (Model.scenariene != null)
+                    { 
+                            <div class="formLabel">
+                                        @Html.Label("Scenario")
+                            </div> 
+                            <div class="formField">
+                                        @Html.DropDownListFor(m => m.sesjonen.scenarioID, new SelectList(Model.scenariene, "ID", "name", Model.sesjonen.scenarioID))
+                            </div>
+                    }
+                    @:<div id="deltakelseZoneHome">
+                       
+                        int i = 0;
+                        foreach (var deltakelse in Model.sesjonen.Spillere)
+                        {
+                        <div class="deltakelseZone">
+                            <div class="dragField">X</div>
+                            <div class="deltakerDrag"></div>
+                            @Html.HiddenFor(m => m.sesjonen.Spillere[i].sesjonID)
+                            @Html.HiddenFor(m => m.sesjonen.Spillere[i].spilldeltakelseID)
+
+                            <div class="formLabel dragMe">
+                                @Html.Label("Plassering")
+                            </div>
+                            <div class="formFieldShort posisjon">
+                                @Html.TextBoxFor(m => m.sesjonen.Spillere[i].posisjon)
+                            </div>
+                            <div class="formLabel dragMe">
+                                @Html.Label("Poengsum")
+                            </div>
+                            <div class="formFieldShort poengsum"> 
+                                @Html.TextBoxFor(m => m.sesjonen.Spillere[i].poengsum)
+                            </div>
+                            <div class="formLabel dragMe">
+                                @Html.Label("Spiller")
+                            </div>
+                            <div class="formField spillerfeltet">
+                                @Html.DropDownListFor(m => m.sesjonen.Spillere[i].deltakerID, new SelectList(Model.spillerne, "ID", "name", Model.sesjonen.Spillere[i].deltakerID))
+                                <input type="button" class="forgotPlayerButton" data-ajax-destination="AddUser" value="Legg til spiller" />
+                            </div>
+
+                            @if (Model.fraksjonene != null)
+                            {
+                                <div class="formLabel dragMe">
+                                    @Html.Label("Fraksjon")
+                                </div>
+                                <div class="formField">
+                                    @Html.DropDownListFor(m => m.sesjonen.Spillere[i].fraksjonID, new SelectList(Model.fraksjonene, "ID", "name", Model.sesjonen.Spillere[i].fraksjonID))
+                                </div>
+                            }
+                        </div>
+
+                        ++i;
+
+                        }
+                    @:</div>
+                    <div class="formLabel">
+                            @Html.Label("AAR overskrift")
+                    </div>
+                    @Html.HiddenFor(model => model.sesjonen.spillrapport.spillrapportID)
+                    @Html.HiddenFor(model => model.sesjonen.spillrapport.spillerID)
+                    <div class="formField">
+                            @Html.TextBoxFor(model => model.sesjonen.spillrapport.overskrift)
+                    </div>
+                     <div class="formLabel">
+                            @Html.Label("AAR tekst")
+                    </div>
+                    <div class="formField">
+                            @Html.TextAreaFor(model => model.sesjonen.spillrapport.rapport)
+                    </div>   
+                    <div style="width:100%; float:left;">         
+                    @if (Model.sesjonen.Spill.spillID == 0)
+                    {
+                            <input type="submit" name="submit" value="Opprett ny sesjon" />
+                    }
+                    else
+                    { 
+                            <input type="submit" name="submit" value="Endre sesjon" />
+                    }
+                    </div>   
+}
+</div>
+</div>
+
+<div id="personUpdaterDiv">
+    <div class="prajax">Foravn:</div>
+    <input id="firstVariable" type="text" value="" />
+    <div class="prajax">Etternavn:</div>
+    <input id="secondVariable" type="text" value="" />
+    <br />
+    <input type="button" id="newPlayerButton" value="Legg til spiller" />
+    <input type="button" id="cancelNewPlayerButton" value="Kanseller" />
+</div>

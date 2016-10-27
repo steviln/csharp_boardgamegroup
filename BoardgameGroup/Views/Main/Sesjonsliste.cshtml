@@ -1,0 +1,23 @@
+﻿@model IEnumerable<BoardgameGroup.Models.HtmlListDisplay>
+
+@{
+    ViewBag.Title = "Sesjonsliste";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="mainContent">
+    <div id="sideMenu">
+    </div>
+    <div id="contentField">
+        <h2>Spillinger</h2>
+        @foreach (var item in Model) {
+            <div class="gamelistcolumnholder">
+                <div class="gamelistcolumn">
+                    @Html.DisplayFor(modelItem => item.name)
+                </div>
+                <div class="gamelistcolumn">
+                    @Html.ActionLink("Vis spilling", "registrerSpilldeltakelse", new { club = ViewBag.clubURLname, spillID = item.secondaryID, sesjonID = item.primaryID })
+                </div>
+            </div>
+                }
+            </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@model BoardgameGroup.Models.SpillerLoginSamler
+
+
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="mainContent">
+<h1>Register</h1>
+<div id="errorMessageRed">@ViewBag.feilstreng </div>
+@using (Html.BeginForm()) { 
+    <fieldset>      
+        <div class="formLabel">
+            @Html.Label("Fornavn") 
+        </div>
+        <div class="formField">
+            @Html.TextBoxFor(model => model.spillere.fornavn) 
+        </div>
+        <div class="formLabel">
+            @Html.Label("Etternavn")
+        </div>
+        <div class="formField">
+            @Html.TextBoxFor(model => model.spillere.etternavn)
+        </div>
+        <div class="formLabel">
+            @Html.Label("Epost")
+        </div>
+        <div class="formField">
+            @Html.TextBoxFor(model => model.spillere.epost)
+        </div>
+        <div class="formLabel">
+            @Html.Label("Telefon")
+        </div>
+        <div class="formField">
+            @Html.TextBoxFor(model => model.spillere.phone)
+        </div>
+ 
+        @if (ViewBag.loggedID == 0)
+        {
+            @: <div class="formLabel">
+                @Html.Label("Brukernavn")
+            @:</div>
+            @: <div class="formField">
+                @Html.TextBoxFor(model => model.spillereLogin.brukernavn)
+            @: </div>
+            @: <div class="formLabel">
+                @Html.Label("Passord")
+            @: </div>
+            @: <div class="formField">
+                @Html.PasswordFor(model => model.spillereLogin.passord)
+            @:  </div>
+            @: <div class="formLabel">
+                @Html.Label("Gjenta passord")
+            @: </div>
+            @: <div class="formField">
+                @Html.Password("passordkopi", Model.spillereLogin.passord)
+            @: </div>
+        }
+         <input type="hidden" name="clubID" id="clubID" value="@ViewBag.klubbID" />
+         <input class="hovedSubmitKnapp" type="submit" name="submit" value="Opprett konto" />
+
+    </fieldset>    
+}
+</div>

@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="/Content/Site.css" rel="stylesheet"/>
+        <link href="/Content/mobile.css" rel="stylesheet" />
+        <link href="/Content/desktop.css" rel="stylesheet" />
+        <script src="/Scripts/jquery-1.7.1.js"></script>
+        <script src="/Scripts/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+        <script src="~/Scripts/Custom/ParticipantSorter.js"></script>
+        <meta name="viewport" content="width=device-width" />
+    </head>
+    <body>
+
+                @Html.Partial("Facebook_script")
+
+
+
+                @Html.Partial("_Hovedmeny")
+
+                @RenderSection("featured", required: false)
+                @RenderBody()
+
+    </body>
+</html>

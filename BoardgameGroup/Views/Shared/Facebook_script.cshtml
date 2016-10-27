@@ -1,0 +1,69 @@
+﻿<div id="fb-root"></div>
+<script>
+
+    
+
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '941343709256136',
+                    xfbml: true,
+                    version: 'v2.4'
+                });
+
+
+            };
+
+
+
+            (function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) { return; }
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            function facebookInit() {
+
+                FB.getLoginStatus(function (response) {
+                    if (response.status === 'connected') {
+                        // the user is logged in and has authenticated your
+                        // app, and response.authResponse supplies
+                        // the user's ID, a valid access token, a signed
+                        // request, and the time the access token 
+                        // and signed request each expire
+                        var uid = response.authResponse.userID;
+                        var accessToken = response.authResponse.accessToken;
+
+                        if ($('#loggitConfirm').length && $('#loginZone').length) {
+
+                            var form = document.createElement("form");
+                            form.setAttribute("method", 'post');
+                            form.setAttribute("action", '/Ajax/FacebookLogin/');
+
+                            var field = document.createElement("input");
+                            field.setAttribute("type", "hidden");
+                            field.setAttribute("name", 'accessToken');
+                            field.setAttribute("value", accessToken);
+                            form.appendChild(field);
+
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                    } else if (response.status === 'not_authorized') {
+                        // the user is logged in to Facebook, 
+                        // but has not authenticated your app
+                        document.getElementById('errorMessageRed').innerHTML = "Du har ikke autentisert siden hos Facebook. Autentisert siden hos Facebook og forsøk igjen.";
+
+                    } else {
+                        // the user isn't logged in to Facebook.
+                        document.getElementById('errorMessageRed').innerHTML = "Du er ikke logget inn på Facebook.";
+                    }
+                });
+
+
+
+            }
+
+
+</script>

@@ -1,0 +1,61 @@
+﻿@model BoardgameGroup.Models.Spillsesjon
+
+@{
+    ViewBag.Title = "Spilling";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mainContent">
+
+<h2>Spilling</h2>
+ <div class="gamelistcolumn">
+        @Html.Label("Spill")
+ </div>
+<div class="gamelistcolumn">
+          @Html.DisplayFor(model => model.Spill.navn)
+</div>
+ <div class="gamelistcolumn">
+        @Html.Label("Dato")
+ </div>
+<div class="gamelistcolumn">
+          @Html.DisplayFor(model => model.dato)
+</div>
+
+<table border="0" cellspacing="0" cellpadding="0">
+ <tr>
+    <th>
+        @Html.Label("Plassering")
+    </th>
+    <th>
+        @Html.Label("Spiller")
+    </th>
+    <th>
+        @Html.Label("Fraksjon")
+    </th>
+    <th>
+        @Html.Label("Poeng")
+    </th>
+</tr>
+
+    @foreach (var deltakelse in Model.Spillere)
+    { 
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => deltakelse.posisjon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => deltakelse.Spiller.fornavn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => deltakelse.fraksjonen.navn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => deltakelse.poengsum)
+        </td>
+
+    </tr>
+
+    }
+    </table>
+</div>

@@ -1,0 +1,32 @@
+﻿
+@model IEnumerable<BoardgameGroup.Models.Spill>
+
+
+@{
+    ViewBag.Title = "SpillListe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mainContent">
+    <div id="sideMenu">
+    @if (ViewBag.status >= 20){
+        @Html.ActionLink("Legg til spill", "Boardgames", new { club = ViewBag.clubURLname, subaction = "addgame" })
+    }
+    </div>
+    <div id="contentField">
+    <h2>Spill Liste</h2>
+    @foreach (var item in Model)
+    {
+        <div class="gamelistcolumnholder">
+            <div class="gamelistcolumn">
+                @Html.DisplayFor(modelItem => item.navn)
+            </div>
+            <div class="gamelistcolumn">
+                @Html.ActionLink("Vis spill ", "Boardgames", new { club = ViewBag.clubURLname, subaction = "viewgame", itemID = item.spillID })
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink(" Rediger spill", "Boardgames", new { club = ViewBag.clubURLname, subaction = "editgame", itemID = item.spillID })
+            </div>
+        </div>
+    }
+    </div>
+ </div>

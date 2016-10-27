@@ -1,0 +1,91 @@
+﻿@model BoardgameGroup.Models.SpillerLoginSamler
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="mainContent">
+
+<h1>Profil</h1>
+<div id="errorMessageRed">@ViewBag.feilstreng </div>
+@using (Html.BeginForm())
+{ 
+    @Html.HiddenFor(model => model.spillere.spillerID)
+    <fieldset>      
+        <div class="formLabel">
+            @Html.Label("Fornavn") 
+        </div>
+        <div class="formField">
+            @Html.TextBoxFor(model => model.spillere.fornavn) 
+        </div>
+        <div class="formLabel">
+            @Html.Label("Etternavn")
+        </div>
+        <div class="formField">
+            @Html.TextBoxFor(model => model.spillere.etternavn)
+        </div>
+        <div class="formLabel">
+            @Html.Label("Epost")
+        </div>
+        <div class="formField">
+            @Html.TextBoxFor(model => model.spillere.epost)
+        </div>
+        <div class="formLabel">
+            @Html.Label("Telefon")
+        </div>
+        <div class="formField">
+            @Html.TextBoxFor(model => model.spillere.phone)
+        </div>
+
+
+        @if (Model.spillereLogin == null)
+        {
+            @: <div class="formLabel">
+                @Html.Label("Skape påloggingsinfo")
+            @: </div>
+            @: <div class="formField">
+                @Html.CheckBox("paalogginfo", false)
+            @: </div>
+        }
+ 
+        @if (Model.spillere != null && Model.spillereLogin != null && (ViewBag.loggedID == Model.spillere.spillerID || Model.spillere.spillerID == 0 || ViewBag.status == 25))
+        {
+            @Html.HiddenFor(model => model.spillereLogin.spillerloginID)
+            @Html.HiddenFor(model => model.spillereLogin.spillerID)
+
+            @: <div class="formLabel">
+                @Html.Label("Brukernavn")
+            @:</div>
+            @: <div class="formField">
+                @Html.TextBoxFor(model => model.spillereLogin.brukernavn)
+            @: </div>
+            @: <div class="formLabel">
+                @Html.Label("Passord")
+            @: </div>
+            @: <div class="formField">
+                @Html.Password("passord", Model.spillereLogin.passord)
+            @:  </div>
+            @: <div class="formLabel">
+                @Html.Label("Gjenta passord")
+            @: </div>
+            @: <div class="formField">
+                @Html.Password("passordkopi", Model.spillereLogin.passord)
+            @: </div>
+            if (Model.statuser.Count() > 0)
+            { 
+                     <div class="formLabel">
+                                        @Html.Label("Status")
+                      </div> 
+                      <div class="formField">
+                                        @Html.DropDownListFor(m => m.spillereLogin.status, new SelectList(Model.statuser, "ID", "name", Model.spillereLogin.status))
+                      </div> 
+            }
+        }
+         <input type="hidden" name="clubID" id="clubID" value="@ViewBag.klubbID" />
+         <input class="hovedSubmitKnapp" type="submit" name="submit" value="Endre konto" />
+
+    </fieldset>    
+}
+</div>

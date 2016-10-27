@@ -1,0 +1,212 @@
+﻿body
+{
+    margin:0;   
+}
+
+
+#menBount li
+{
+    list-style-type: none;
+
+}
+#loggitConfirm
+{
+    float:left;
+}
+#topMenu
+{
+    width:100%;
+    background-color:#000000;
+    border-bottom:solid 15px #930303;    
+}
+#logoField
+{
+   line-height:100px;
+   text-align:center;
+   font-size:85px;
+   font-family:"Times New Roman"; 
+   color:#930303;
+
+}
+#mainContent
+{
+  position:relative; 
+}
+#mainContent h1
+{
+   font-size:30px; 
+   font-family:"Times New Roman"; 
+   color:#930303; 
+   font-weight:bold;   
+}
+#mainContent h2
+{
+   font-size:26px; 
+   font-family:"Times New Roman"; 
+   color:#930303; 
+   font-weight:bold;   
+}
+.formLine
+{
+    width:100%;
+    float:left;
+}
+.hovedSubmitKnapp
+{
+    line-height:22px;
+    height:22px;
+    border:none;
+    padding-left:14px;
+    padding-right:14px;
+    background-color: #930303;
+    color:#FFFFFF;
+    font-size: 16px;
+    font-family:"Times New Roman"; 
+    margin-top:18px;
+    font-weight:bold; 
+    float:left; 
+    clear:left; 
+}
+#errorMessageRed
+{
+    color:#FF0000;
+    line-height:28px;
+    font-size:18px;    
+}
+#internLenker
+{
+    float:left;
+    width:100%;  
+    padding-top:18px;
+    padding-bottom:18px;
+}
+#internLenker a
+{
+    color:#930303;
+    font-family:"Times New Roman";
+    text-decoration:none;
+    padding-right:32px;
+}
+#sideMenu a
+{
+    color:#930303;
+    font-family:"Times New Roman";
+    text-decoration:none;
+    padding-right:18px;
+}
+.gamelistcolumn
+{
+    float:left;
+    width:50%;
+    line-height:20px;
+    font-size:12px;
+    font-family:Arial;    
+}
+.gamelistcolumn a
+{
+    font-size:12px;
+    font-family:"Times New Roman";  
+    color:#930303;
+    text-decoration:none;  
+}
+.deltakelseZone
+{
+    background-color:#EEEEEE;
+    padding:5px 5px 5px 5px;
+    margin-top:5px;   
+    float:left;
+    width:100%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+}
+.dragField 
+{
+    position:absolute;
+    z-index:15;
+    left:0px;
+    top:0px;
+    width: 16px;
+    height:16px;
+    color:#000000;
+    font-weight:bold;
+    line-height:16px;
+    font-size:14px;
+    text-align:center;
+    border:3px solid #000000;
+    background-color:#FFFFFF;
+    cursor:pointer;
+}
+
+
+
+
+#loginZone
+{
+  width:350px;
+  position:relative;
+  margin-top:40px;
+  margin-left:auto;
+  margin-right:auto;       
+}
+
+#playerRatingArea
+{
+    width:100%;
+    position:relative;
+    padding-bottom:35px;
+    padding-top:35px;    
+}
+
+#playerRatingField
+{
+    padding:16px 16px 16px 16px; 
+    font-size:46px;
+    font-family:"Times New Roman";  
+    color:#930303;
+    font-weight:bold;
+    margin-left:auto;
+    margin-right:auto;
+    position:relative;
+    border:2px solid #930303;
+    width:140px;
+    text-align:center;
+}
+
+ 
+#personUpdaterDiv 
+{
+    display:none;
+    border:2px solid #930303;
+    padding:9px 9px 9px 9px;
+    position:absolute;
+    top:200px;
+    width:200px;
+    left:50%;
+    margin-left:-100px;
+    background-color:#FFFFFF;
+} 
+#personUpdaterDiv input {
+    margin-bottom:5px;
+}
+.dragMe {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.deltakerDrag{
+    float:right;
+    width:30px;
+    background-color:#930303;
+}
+.gamelistcolumnholder {
+    float:left;
+    width:100%;
+}

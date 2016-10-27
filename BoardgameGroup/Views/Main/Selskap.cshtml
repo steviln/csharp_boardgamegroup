@@ -1,0 +1,27 @@
+﻿
+@model IEnumerable<BoardgameGroup.Models.Selskap>
+
+
+@{
+    ViewBag.Title = "SelskapListe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mainContent">
+    <div id="sideMenu">
+    @if (ViewBag.status >= 20){
+        @Html.ActionLink("Legg til selskap", "redigerSelskap", new { club = ViewBag.clubURLname, subaction = "addcompany" })
+    }
+    </div>
+    <div id="contentField">
+    <h2>Selskap Liste</h2>
+    @foreach (var item in Model) { 
+        <div class="gamelistcolumn">
+            @Html.DisplayFor(modelItem => item.navn)
+        </div>
+        <div class="gamelistcolumn">
+            @Html.ActionLink("Vis selskap", "redigerSelskap", new { club = ViewBag.clubURLname, subaction = "editcompany", selskapID = item.selskapID })
+        </div>
+    }
+    </div>
+ </div>

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<BoardgameGroup.Models.Spiller>
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mainContent">
+    <div id="contentField">
+    <h2>Spillere</h2>
+    @foreach (var item in Model) { 
+        <div class="gamelistcolumn">
+            @Html.DisplayFor(modelItem => item.fornavn)
+        </div>
+        <div class="gamelistcolumn">
+            @Html.ActionLink("Vis spiller", "Users", new { club = ViewBag.clubURLname, itemID = item.spillerID })
+        </div>
+    }
+    </div>
+ </div>

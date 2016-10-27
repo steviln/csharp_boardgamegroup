@@ -1,0 +1,31 @@
+﻿@model BoardgameGroup.Models.FrontpageData
+
+
+@{
+    ViewBag.Title = "Frontpage";
+}
+
+<div id="mainContent">
+<h1>Drammen Spillforening</h1>
+<div class="frontpageBoxHalf">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td>Spiller</td><td>Rating</td><td>Winrate</td><td>Lossrate</td></td><td></td></tr>
+@for (int i = 0; i < Model.rangertespillere.Count(); i++ )
+{
+    @: <tr><td> @Html.DisplayFor(model => Model.rangertespillere[i].spillernavn) </td><td> @Html.DisplayFor(model => Model.rangertespillere[i].rating) </td><td> @Html.DisplayFor(model => Model.rangertespillere[i].winrate) </td><td> @Html.DisplayFor(model => Model.rangertespillere[i].lossrate) </td><td> @Html.ActionLink("Vis", "Users", new { club = ViewBag.clubURLname, itemID = Model.rangertespillere[i].spillerID })</td></tr>
+}
+</table>
+
+</div>
+<div class="frontpageBoxHalf">
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td>Spill</td><td></td></tr>
+@for (int i = 0; i < 20 && i < Model.sesjoner.Count(); i++ )
+{
+    @: <tr><td> @Html.DisplayFor(model => Model.sesjoner[i].Spill.navn) </td><td> @Html.ActionLink("Vis", "registrerSpilldeltakelse", new { club = ViewBag.clubURLname, spillID = Model.sesjoner[i].Spill.spillID, sesjonID = Model.sesjoner[i].spillsesjonID })</td></tr>
+}
+</table>
+
+</div>
+</div>
+s
